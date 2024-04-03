@@ -33,6 +33,7 @@
 
       input[type="text"],
       input[type="email"],
+      input[type="password"],
       input[type="date"],
       input[type="tel"],
       input[type="submit"] {
@@ -67,29 +68,32 @@
   <body>
     <div class="container">
       <h2>Sign Up</h2>
-      <form>
+      <form action="/submit" method="post">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required />
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
-        <div id="emailError" class="error">
-          * Please enter a valid email address.
-        </div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
 
-        <div id="usernameError" class="error">
-          * Please enter a valid username.
-        </div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
 
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" required />
-
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" required />
-
+        <label for="repassword">Reconfirm Password:</label>
+        <input type="password" id="repassword" name="repassword" required />
         <input type="submit" value="Sign Up" />
       </form>
     </div>
+    <script>
+      function checkPasswordMatch() {
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("repassword");
+        if (password.value != confirmPassword.value) {
+          confirmPassword.setCustomValidity("Passwords do not match.");
+        } else {
+          confirmPassword.setCustomValidity("");
+        }
+      }
+      document.getElementById("repassword").onchange = checkPasswordMatch;
+    </script>
   </body>
 </html>
+
